@@ -6,7 +6,7 @@ import { addToPastes, updateToPastes } from '../redux/pasteSlice';
 const Home = () => {
     const [title,setTitle]=useState('');
     const [value,setValue]=useState('');
-    const [searchParams,setSearchParams]=useSearchParams();
+    const [searchParams,setSearchParams]=useSearchParams();// Destructure useSearchParams
     const pasteId=searchParams.get('pasteId');
     const dispatch=useDispatch();
     const allPastes=useSelector((state)=>state.paste.pastes);
@@ -23,7 +23,7 @@ const Home = () => {
         const paste={
             title: title,
             content:value,
-            _id:pasteId||Date.now().toString(36),
+            _id:pasteId||Date.now().toString(36)+Math.random().toString(36).substring(2),
             createdAt:new Date().toISOString(),
         }
 
@@ -42,6 +42,13 @@ const Home = () => {
             setValue('');
             setSearchParams({});
     }
+
+    const resetPaste = () => {
+        setTitle("");
+        setValue("");
+        setSearchParams({});
+        // navigate("/");
+      };
 
   return (
      <div>
